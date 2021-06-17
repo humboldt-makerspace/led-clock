@@ -14,6 +14,7 @@ public:
 
 	/* functions */
 	static int getLedIndex (int pos);
+	static int getLedIndex (int x, int y);
 };
 
 #endif

@@ -1,7 +1,7 @@
 #ifndef INTERFACE_HPP
 #define INTERFACE_HPP
 
-#include "constants.hpp"
+#include "constants.h"
 #include "Arduino.h"
 #include "FastLED.h"
 #include <ESP8266WiFi.h>

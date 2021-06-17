@@ -2,7 +2,7 @@
 #define CLOCK_HPP
 
 #include <ctime>
-#include "constants.hpp"
+#include "constants.h"
 
 class Clock {
 private:

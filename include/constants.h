@@ -1,13 +1,13 @@
-#ifndef CONSTANTS_HPP
-#define CONSTANTS_HPP
+#ifndef CONSTANTS_H
+#define CONSTANTS_H
 
 #define DIGITAL					0
 #define ANALOG					1
 #define COUNTER					2
 #define BINARY					3
+#define DIGITAL_MINI			4
 
-#define CLOCK_TYPE				COUNTER
-
+#define CLOCK_TYPE				DIGITAL_MINI
 /* data pins for led stripes */
 #define LED_PIN					D7
 
@@ -24,6 +24,9 @@
 #elif CLOCK_TYPE == BINARY
     #define NUM_LEDS			11
 	#define OFFSET_INC_MS		80
+#elif CLOCK_TYPE == DIGITAL_MINI
+    #define NUM_LEDS			82
+	#define OFFSET_INC_MS		80
 #else
 	#define NUM_LEDS			0
 	#define OFFSET_INC_MS		100
@@ -37,6 +40,10 @@
 /* digital clock */
 #define NUM_FIGURES				10
 #define LEDS_PER_FIGURE			20
+#define FIGURE_HEIGHT			7
+#define FIGURE_WIDTH			4
+#define GRID_HEIGHT				7
+#define GRID_WIDTH				21
 
 /* analog clock */
 #define WATCH_HAND_WIDTH		5

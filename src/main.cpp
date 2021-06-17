@@ -1,4 +1,4 @@
-#include "includes.hpp"
+#include "includes.h"
 
 void setup ()
 {
@@ -11,5 +11,4 @@ void loop ()
 	ColorGradient::changeShift();
 	Clock::showTime(CLOCK_TYPE);
 	FastLED.show();
-	FastLED.delay(1);
 }
