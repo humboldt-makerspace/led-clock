@@ -6,10 +6,14 @@
 #define COUNTER					2
 #define BINARY					3
 #define DIGITAL_MINI			4
+#define EPOXY_COUNTER			5
+#define EPOXY_DIGITAL			6
 
-#define CLOCK_TYPE				DIGITAL_MINI
+#define CLOCK_TYPE				EPOXY_DIGITAL
 /* data pins for led stripes */
-#define LED_PIN					D7
+#define LED_PIN					D2
+#define LED_PIN_2				D3
+#define LED_PIN_3				D4
 
 /* number of leds per data pin */
 #if CLOCK_TYPE == DIGITAL
@@ -27,19 +31,35 @@
 #elif CLOCK_TYPE == DIGITAL_MINI
     #define NUM_LEDS			82
 	#define OFFSET_INC_MS		80
+#elif CLOCK_TYPE == EPOXY_COUNTER
+	#define NUM_LEDS			25
+	#define OFFSET_INC_MS		80
+#elif CLOCK_TYPE == EPOXY_DIGITAL
+	#define NUM_LEDS			26
+	#define OFFSET_INC_MS		80
 #else
 	#define NUM_LEDS			0
 	#define OFFSET_INC_MS		100
 #endif
 
 /* buttons on control pcb */
-#define BUTTON_1_PIN			D5
-#define BUTTON_2_PIN			D6
+#if CLOCK_TYPE == EPOXY_COUNTER
+	#define BUTTON_1_PIN			D1
+	#define BUTTON_2_PIN			D2
+#else
+	#define BUTTON_1_PIN			D5
+	#define BUTTON_2_PIN			D6
+#endif
 #define NUM_BUTTONS				2
+#define BUTTON_PRESS_TOLERANCE  100
 
 /* digital clock */
-#define NUM_FIGURES				10
-#define LEDS_PER_FIGURE			20
+#define NUM_FIGURES			10
+#if CLOCK_TYPE == EPOXY_DIGITAL
+	#define LEDS_PER_FIGURE		13
+#else
+	#define LEDS_PER_FIGURE		20
+#endif
 #define FIGURE_HEIGHT			7
 #define FIGURE_WIDTH			4
 #define GRID_HEIGHT				7
@@ -53,21 +73,34 @@
 #define LEDS_SECOND_DIGIT		9
 #define MINUTE_OFFSET			LEDS_FIRST_DIGIT + LEDS_SECOND_DIGIT
 #define HOUR_OFFSET				2 * (LEDS_FIRST_DIGIT + LEDS_SECOND_DIGIT)
+#define EPOXY_FADE_FACTOR		100
 
 /* lighting */
 #define BRIGHTNESS_DEC			20
 
 /* time information */
-#define TIME_ZONE				1
+#define TIME_ZONE				2
 #define DST						1
+
+#define COLOR_GRADIENT_TIMER	1
+#if CLOCK_TYPE == EPOXY_DIGITAL
+	#define NUM_LEDS_PALETTE	78
+#else
+	#define NUM_LEDS_PALETTE	NUM_LEDS
+#endif
 
 /* color modes for light show */
 typedef enum colors {
 	RAINBOW,
-	SUPERMAN,
-	AVH,
-	TEMPERATURE,
-	MONO
+	RAINBOW_SHIFT,
+	PRIDE,
+	RED,
+	ORANGE,
+	YELLOW,
+	GREEN,
+	PURPLE,
+	BLUE,
+	WHITE
 } ColorMode;
 
 /* all figures that be displayed on clock */
@@ -82,7 +115,7 @@ typedef enum timeUnits {
 
 /* position of figures on clock */
 typedef enum clockPos {
-	HR_1, HR_2, MIN_1, MIN_2
+	HR_1, HR_2, MIN_1, MIN_2, SEC_1, SEC_2
 } ClockPosition;
 
 #endif

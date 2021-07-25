@@ -8,11 +8,20 @@ void initButtons (void)
 	pinMode(BUTTON_1_PIN, INPUT_PULLUP);
 	pinMode(BUTTON_2_PIN, INPUT_PULLUP);
 	for (int i = 0; i < NUM_BUTTONS; i++) Interface::btnPressed[i] = false;
+
+	//attachInterrupt(BUTTON_1_PIN, Interface::buttonCallbackFirst, FALLING);
+	//attachInterrupt(BUTTON_2_PIN, Interface::buttonCallbackSecond, FALLING);
 }
 
 void initLeds (void)
 {
 	FastLED.addLeds<WS2812B, LED_PIN, GRB>(Interface::leds, NUM_LEDS);
+	#if CLOCK_TYPE == EPOXY_DIGITAL
+	FastLED.addLeds<WS2812B, LED_PIN_2, GRB>(Interface::leds2, NUM_LEDS);
+	FastLED.addLeds<WS2812B, LED_PIN_3, GRB>(Interface::leds3, NUM_LEDS);
+	#endif
+	Interface::cmode = RAINBOW;
+	ColorGradient::init();
 }
 
 void initClockStatus (void)

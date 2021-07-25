@@ -10,9 +10,7 @@ void WatchHand::showHour (int hour)
 	if (end > NUM_LEDS - 1) end -= NUM_LEDS;
 	for (int i = 0; i < NUM_LEDS; i++) {
 		if ((begin <= end && i >= begin && i <= end) || (begin > end && (i >= begin || i <= end))) {
-			int colorIndex = i + ColorGradient::offset;
-			if (colorIndex >= NUM_LEDS) colorIndex -= NUM_LEDS;
-			Interface::leds[Mapping::getLedIndex(i)] = ColorGradient::colors[colorIndex];
+			Interface::leds[Mapping::getLedIndex(i)] = ColorGradient::colors[i];
 		}
 		else Interface::leds[Mapping::getLedIndex(i)] = CRGB::Black;
 	}

@@ -8,6 +8,7 @@ private:
 	/* variables */
 	static boolean alphabet[NUM_FIGURES][LEDS_PER_FIGURE];
 	static boolean miniAlphabet[NUM_FIGURES][FIGURE_WIDTH][FIGURE_HEIGHT];
+	static boolean epoxyAlphabet[NUM_FIGURES][LEDS_PER_FIGURE];
 
 public:
 	/* functions */

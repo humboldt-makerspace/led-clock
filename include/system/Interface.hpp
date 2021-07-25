@@ -21,16 +21,22 @@ private:
 
 	/* functions */
 	static void changeBrightness (void);
+	static void changeColorMode (void);
 
 public:
 	/* variables */
 	static CRGB leds[NUM_LEDS];
+	static CRGB leds2[NUM_LEDS];
+	static CRGB leds3[NUM_LEDS];
 	static bool btnPressed[NUM_BUTTONS];
 	static uint8_t brightness;
+	static ColorMode cmode;
 
 	/* functions */
 	static void allLedsOff (void);
 	static void readButtons (void);
+	static void buttonCallbackFirst (void);
+	static void buttonCallbackSecond (void);
 };
 
 #endif
