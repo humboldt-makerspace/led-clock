@@ -9,6 +9,7 @@ uint8_t Interface::brightness;
 ColorMode Interface::cmode;
 long toleranceTimer1 = 0;
 long toleranceTimer2 = 0;
+Storable Interface::store;
 
 void Interface::allLedsOff (void)
 {
@@ -24,6 +25,8 @@ void Interface::changeBrightness (void)
 
 	if (brightness < 0) brightness = 0;
 	FastLED.setBrightness(brightness);
+	Interface::store.brightness = brightness;
+	UserPrefs::saveValuesToEEPROM();
 }
 
 void Interface::changeColorMode (void)
@@ -34,6 +37,8 @@ void Interface::changeColorMode (void)
 		tmp++;
 		cmode = (ColorMode) tmp;
 	}
+	Interface::store.cmode = cmode;
+	UserPrefs::saveValuesToEEPROM();
 }
 
 void Interface::readButtons (void)

@@ -7,6 +7,8 @@
 #include <ESP8266WiFi.h>
 #include "WiFiUdp.h"
 
+#include "system/UserPrefs.hpp"
+
 #include "utils/ColorGradient.hpp"
 #include "utils/Figures.hpp"
 #include "utils/Mapping.hpp"
@@ -31,6 +33,7 @@ public:
 	static bool btnPressed[NUM_BUTTONS];
 	static uint8_t brightness;
 	static ColorMode cmode;
+	static Storable store;
 
 	/* functions */
 	static void allLedsOff (void);

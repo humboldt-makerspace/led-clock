@@ -9,9 +9,9 @@
 #define EPOXY_COUNTER			5
 #define EPOXY_DIGITAL			6
 
-#define CLOCK_TYPE				EPOXY_DIGITAL
+#define CLOCK_TYPE				DIGITAL
 /* data pins for led stripes */
-#define LED_PIN					D2
+#define LED_PIN					D7
 #define LED_PIN_2				D3
 #define LED_PIN_3				D4
 
@@ -88,6 +88,8 @@
 #else
 	#define NUM_LEDS_PALETTE	NUM_LEDS
 #endif
+
+#define EEPROM_SIZE				512
 
 /* color modes for light show */
 typedef enum colors {

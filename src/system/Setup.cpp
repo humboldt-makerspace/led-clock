@@ -20,14 +20,16 @@ void initLeds (void)
 	FastLED.addLeds<WS2812B, LED_PIN_2, GRB>(Interface::leds2, NUM_LEDS);
 	FastLED.addLeds<WS2812B, LED_PIN_3, GRB>(Interface::leds3, NUM_LEDS);
 	#endif
-	Interface::cmode = RAINBOW;
+	UserPrefs::readValuesFromEEPROM();
+	Interface::cmode = Interface::store.cmode;
+	FastLED.setBrightness(Interface::store.brightness);
 	ColorGradient::init();
 }
 
 void initClockStatus (void)
 {
 	Figures::defineAlphabet();
-	ColorGradient::changeColorGradient(RAINBOW);
+	ColorGradient::changeColorGradient(GREEN);
 }
 
 void Setup::initWifi (void)
