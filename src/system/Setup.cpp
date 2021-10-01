@@ -15,7 +15,7 @@ void initButtons (void)
 
 void initLeds (void)
 {
-	FastLED.addLeds<WS2812B, LED_PIN, GRB>(Interface::leds, NUM_LEDS);
+	FastLED.addLeds<WS2812B, LED_PIN>(Interface::leds, NUM_LEDS);
 	#if CLOCK_TYPE == EPOXY_DIGITAL
 	FastLED.addLeds<WS2812B, LED_PIN_2, GRB>(Interface::leds2, NUM_LEDS);
 	FastLED.addLeds<WS2812B, LED_PIN_3, GRB>(Interface::leds3, NUM_LEDS);
@@ -27,7 +27,7 @@ void initLeds (void)
 }
 
 void initClockStatus (void)
-{
+{ 
 	Figures::defineAlphabet();
 	ColorGradient::changeColorGradient(GREEN);
 }

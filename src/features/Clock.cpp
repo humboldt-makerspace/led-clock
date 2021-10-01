@@ -44,6 +44,13 @@ void Clock::showTime (int type)
 			Figures::displayFigure((Figure)(gmtm->tm_sec % 10), SEC_2);
 			break;
 		}
+		case LARGE_SEGMENT: {
+			Figures::displayFigure((Figure)(gmtm->tm_hour / 10), HR_1);
+			Figures::displayFigure((Figure)(gmtm->tm_hour % 10), HR_2);
+			Figures::displayFigure((Figure)(gmtm->tm_min / 10), MIN_1);
+			Figures::displayFigure((Figure)(gmtm->tm_min % 10), MIN_2);
+			break;
+		}
 		case BINARY: {
 			break;
 		}

@@ -1,9 +1,10 @@
 #include "utils/Figures.hpp"
 #include "system/Interface.hpp"
 
-boolean Figures::alphabet[NUM_FIGURES][LEDS_PER_FIGURE];						/* for white epoxy clock */
-boolean Figures::miniAlphabet[NUM_FIGURES][FIGURE_WIDTH][FIGURE_HEIGHT];		/* for 3d printed compact clock */
-boolean Figures::epoxyAlphabet[NUM_FIGURES][LEDS_PER_FIGURE];					/* for epoxy digital clock */
+boolean Figures::alphabet[NUM_FIGURES][LEDS_PER_FIGURE];						/* white epoxy clock */
+boolean Figures::miniAlphabet[NUM_FIGURES][FIGURE_WIDTH][FIGURE_HEIGHT];		/* 3d printed compact clock */
+boolean Figures::epoxyAlphabet[NUM_FIGURES][LEDS_PER_FIGURE];					/* epoxy digital clock */
+boolean Figures::segmentAlphabet[NUM_FIGURES][LEDS_PER_FIGURE];					/* large 3d printed segment clock */
 
 void Figures::defineAlphabet (void)
 {
@@ -146,6 +147,45 @@ void Figures::defineAlphabet (void)
 
 			/* 9 */
 			if (i != 8) epoxyAlphabet[N9][i] = true;
+		}
+	}
+	else if (CLOCK_TYPE == LARGE_SEGMENT) {
+		for (int i = 0; i < NUM_FIGURES; i++) {
+			for (int j = 0; j < LEDS_PER_FIGURE; j++) {
+				segmentAlphabet[i][j] = false;
+			}
+		}
+
+		for (int i = 0; i < LEDS_PER_FIGURE; i++) {
+			/* 0 */
+			if (i > 10) segmentAlphabet[N0][i] = true;
+
+			/* 1 */
+			if ((i > 10 && i < 24) || i > 71) segmentAlphabet[N1][i] = true;
+
+			/* 2 */
+			if (i < 36 || (i > 47 && i < 73)) segmentAlphabet[N2][i] = true;
+
+			/* 3 */
+			if (i < 36 || i > 59) segmentAlphabet[N3][i] = true;
+
+			/* 4 */
+			if (i < 24 || (i > 34 && i < 48) || i > 71) segmentAlphabet[N4][i] = true;
+
+			/* 5 */
+			if (i < 11 || (i > 22 && i < 48) || i > 59) segmentAlphabet[N5][i] = true;
+
+			/* 6 */
+			if (i < 11 || i > 22) segmentAlphabet[N6][i] = true;
+
+			/* 7 */
+			if ((i > 10 && i < 36) || i > 71) segmentAlphabet[N7][i] = true;
+
+			/* 8 */
+			segmentAlphabet[N8][i] = true;
+
+			/* 9 */
+			if (i < 48 || i > 59) segmentAlphabet[N9][i] = true;
 		}
 	}
 }
@@ -292,6 +332,34 @@ void Figures::displayFigure (Figure figure, ClockPosition pos)
 					break;
 				}
 			}
+		}
+	}
+	else if (CLOCK_TYPE == LARGE_SEGMENT) {
+		int offset = 0;
+		switch (pos) {
+			case HR_1: {
+				offset = 1;
+				break;
+			}
+			case HR_2: {
+				offset = 1 + LEDS_PER_FIGURE;
+				break;
+			}
+			case MIN_1: {
+				offset = 1 + 2 * LEDS_PER_FIGURE;
+				break;
+			}
+			case MIN_2: {
+				offset = 1 + 3 * LEDS_PER_FIGURE;
+				break;
+			}
+			default: return;
+		}
+		for (int i = 0; i < LEDS_PER_FIGURE; i++) {
+			int colorIndex = i + offset;
+			if (colorIndex >= NUM_LEDS) colorIndex -= NUM_LEDS;
+			if (!segmentAlphabet[figure][i]) Interface::leds[i + offset] = CRGB::Black;
+			else Interface::leds[i + offset] = ColorGradient::colors[colorIndex];
 		}
 	}
 }

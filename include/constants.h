@@ -8,8 +8,9 @@
 #define DIGITAL_MINI			4
 #define EPOXY_COUNTER			5
 #define EPOXY_DIGITAL			6
+#define LARGE_SEGMENT			7
 
-#define CLOCK_TYPE				DIGITAL
+#define CLOCK_TYPE				LARGE_SEGMENT
 /* data pins for led stripes */
 #define LED_PIN					D7
 #define LED_PIN_2				D3
@@ -37,6 +38,9 @@
 #elif CLOCK_TYPE == EPOXY_DIGITAL
 	#define NUM_LEDS			26
 	#define OFFSET_INC_MS		80
+#elif CLOCK_TYPE == LARGE_SEGMENT
+	#define NUM_LEDS			341
+	#define OFFSET_INC_MS		80
 #else
 	#define NUM_LEDS			0
 	#define OFFSET_INC_MS		100
@@ -44,6 +48,9 @@
 
 /* buttons on control pcb */
 #if CLOCK_TYPE == EPOXY_COUNTER
+	#define BUTTON_1_PIN			D1
+	#define BUTTON_2_PIN			D2
+#elif CLOCK_TYPE == LARGE_SEGMENT
 	#define BUTTON_1_PIN			D1
 	#define BUTTON_2_PIN			D2
 #else
@@ -57,6 +64,8 @@
 #define NUM_FIGURES			10
 #if CLOCK_TYPE == EPOXY_DIGITAL
 	#define LEDS_PER_FIGURE		13
+#elif CLOCK_TYPE == LARGE_SEGMENT
+	#define LEDS_PER_FIGURE		85
 #else
 	#define LEDS_PER_FIGURE		20
 #endif
@@ -73,7 +82,7 @@
 #define LEDS_SECOND_DIGIT		9
 #define MINUTE_OFFSET			LEDS_FIRST_DIGIT + LEDS_SECOND_DIGIT
 #define HOUR_OFFSET				2 * (LEDS_FIRST_DIGIT + LEDS_SECOND_DIGIT)
-#define EPOXY_FADE_FACTOR		100
+#define EPOXY_FADE_FACTOR		80
 
 /* lighting */
 #define BRIGHTNESS_DEC			20
@@ -82,7 +91,7 @@
 #define TIME_ZONE				2
 #define DST						1
 
-#define COLOR_GRADIENT_TIMER	1
+#define COLOR_GRADIENT_TIMER	10
 #if CLOCK_TYPE == EPOXY_DIGITAL
 	#define NUM_LEDS_PALETTE	78
 #else
@@ -90,6 +99,13 @@
 #endif
 
 #define EEPROM_SIZE				512
+
+/* 12 V LED strip */
+#define REDPIN 					D0
+#define GREENPIN 				D6
+#define BLUEPIN 				D8
+
+#define FADESPEED				2     // make this higher to slow down
 
 /* color modes for light show */
 typedef enum colors {
